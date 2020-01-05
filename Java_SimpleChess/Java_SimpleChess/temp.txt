@@ -1,0 +1,169 @@
+private void initRootNode() {
+		int boardValue = getBoardStateValue(this.chessBoard); // sum of all the pieces in the unitlist
+		rootNode = new ChessGameNode(this.chessBoard,  this.unitList, boardValue, this.player);
+
+		// set the player
+		// getAllLegalMovesPlayer, gets all the legal moves of a player
+		// childrenNodes = new ChessGameNode[legalMovesplayer.length]
+		// childrenNodes[0] is the node after making the first move in the move list
+		// 
+		// create the rootNode
+		// ChessGameNode(chessBoard, unitList)
+
+	}
+
+	private void createChildrenNodes() {
+		getAllLegalMovesPlayer();
+
+		// now the array is allocated for all the childrenNodes of the root
+		this.childrenNodes = new ChessGameNode[moveList.length];
+	}
+
+	public int getBestMove(Tile[][] chessBoard, char player, int depth) {
+
+		// base case
+		if (depth == 3) {
+			// return the value of the boardState of the current node
+			return currentNode.getValue();
+		}
+
+		depth += depth + 1;
+
+		// from the movelist select the first move
+		// perform that move (move the piece, alter the board, alter the unitlist)
+		// in the first node of the 
+
+		// I can keep track of the depth easily with a counter
+		// but how to keep track of how the index of the next index?
+
+		// I can do it in a loop maybe, 
+		// for moves in movelist
+		// execute move in, get new boardState, getNewUnitLIst, getNewBoardValue, getBestMoveOtherPlayer, depth
+		// when deptth is three break the recursion
+		// save the move that leads to the best board state in an array
+
+		// there is still something missing checks
+		// the value of all the uneven nodes shoudld be checked for 
+		Moves nextMove;
+		for (int i = 0; i < this.moveList.length; i++) {
+
+			// when returning the Move it should also return the unit which should make the move, how would I do that?
+			nextMove = this.moveList[i];
+
+			// do 'nextMove' update the chessboard and the unitList
+			SimpleChess.makeMove();	
+
+			// get the newValue
+			getNewBoardValue(chessBoard);
+
+			ChessGameNode newChildNode = new ChessGameNode(newBoard, newUnitList, newValue, otherPlayer);
+
+
+
+			// from the new unitList we calculate the new Value
+			// by summing all the pieces still in the unitLIst
+
+			// call getBestMoveAgain with the new Parameters
+
+			// do the move, 
+			// make a new ChessGAmeNOde with the new board
+
+
+		}
+
+		return getBestMove(newBoard, otherPlayer, depthCounter, indexOfMoveCheckedInMoveList); 
+		
+
+	/*
+	 * mode can be:
+	 * 		- random: in which can the legal moves for the player are generated
+	 * 				  and one of those moves is chosen randomly
+	 *  	- ab: in which three layers deep, or 5 seconds long the best move is search
+	 * 				in a collection of array  
+	 */
+	public Moves getBestMove(String mode, char player) {
+		Timer timer = new Timer();
+		timer.schedule(new TimerTask() {
+
+			@Override 
+			public void run() {
+				if (mode.equals("random")) {
+
+					int randomIndex;
+					generateLegalMovesPlayer(player);
+
+					Random random = new Random();
+					randomIndex = random.nextInt(moveList.length);
+					Moves randomMove = moveList[randomIndex];
+
+					return randomMove;
+				} 
+					// when we generated the legal moves of a player
+					// we have to make the move at least in the tree
+
+					// perform a move in the moveList
+					// check the value of the board for the player after performing the move
+					// after performing the move call getBestMove for the new player
+					// check the 
+				/* 
+				 *  Solution Words
+				 * Check the score of the boardState, generate all the legal moves of the current player save that in an array
+				 * Do a move in the array, check the new scoreboardState, generate all the legale move of the other player 
+				 * save them in an array, (do that recursively)
+				 * three layers deep maximum
+				 * 
+				 */
+				/*
+				 * So for all the pieces in the unitList we find the correct piece on the chessBoard
+				 * 
+				 */
+				// go through the unitList and get the moves of the units
+
+				// do a random move and check the boardstate after the move 3 plies deep
+
+				// save the move that most improves the (blacks) board state
+				/*
+				 * The first boardState is the root
+				 * we check all the moves the current player can make, these are the children
+				*/
+
+				/* 
+				 * So now we have to check how to check the board state
+				 * Answer: The board state is the sum of the value of the pieces of a player
+				 * still on the board
+				 */
+
+				/* 
+				 * so essentially get board state, check the possible moves in an array that's the first level
+				 * at the first level we have an array with all the moves that are possible.
+				 * When we have that list we just go through the list sequentially, we perform the move at array index 1
+				 * Once we have performed that move, we check the new boardstate and check the response the enemy player can make
+				 * this will also be an array of moves. When we got a list of all the response moves, we perform the moves
+				 * in this array sequentially again, and check the boardstate after these moves
+				 * 
+				*/ 
+			}
+		}, 5000);	
+		// get the boardstate
+
+		// calculate 3/4 plies deep, or 5 seconds
+
+		// during calculations 
+
+		// calculate the best moves based on the value of the pieces
+	}
+
+	private int getBoardStateValue(Tile[][] chessBoard, char player) {
+		// check the unitList for all the pieces of a player still on the board
+		// and returns the sum of their value
+		return 0;
+	}
+
+	private void findPiecesOnChessBoard() {
+		// you get the unitLIst, find a piece with specific coordinates
+		// find a piece with the same coordinates on the chessboard
+	}
+
+
+
+	}
